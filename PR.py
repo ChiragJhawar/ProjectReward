@@ -228,7 +228,7 @@ def Call_Debit_Spread():
                 
                 #Declaring variables
                 strikeShort = short
-                strikeLong = long
+                strikeLong = longUCO
                 premiumShort = n[short]
                 premiumLong = n[long]
                 
@@ -287,7 +287,7 @@ def Put_Debit_Spread():
 
                         
     plotGraph(best_ratio, 'Put Debit Spread', 'putD')  
-    return("Best Put Debit Spread: ", best_ratio)
+    return ("Best Put Debit Spread: ", best_ratio)
 
 #Final Testing call for all spreads
 def finalSpreads():
