@@ -17,7 +17,14 @@ def getStock():
 btn = Button(top, text = "Set stock", command = getStock)
 canvas1.create_window(100,90,window=btn)
 PR.setstock(stock.get())
-btn1 = Button(top, text="Bearish Put Spread" , command = PR.Put_Debit_Spread)
+def get_pds():
+	win = tk.Toplevel(top)
+	text = PR.Put_Debit_Spread()
+	Label(win , text = text).pack()
+	
+
+
+btn1 = Button(top, text="Bearish Put Spread" , command = get_pds)
 btn2 = Button(top, text="Bearish Call Spread", command = PR.Call_Credit_Spread)
 btn3 = Button(top, text="Bullish Put Spread", command = PR.Put_Credit_Spread)
 btn4 = Button(top, text="Bullish Call Spread", command = PR.Call_Debit_Spread)
