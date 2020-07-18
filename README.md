@@ -22,8 +22,7 @@ We also intend this to make this a full stack development project and although i
 
 As of now we have a very basic GUI setup that prints out our suggestion and shows the payoff Matric Graph
 
-<img src="GUI.png"
-     alt="Markdown Monster icon" />
+<img src="GUI2.png" />
 <br />
 
 
