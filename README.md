@@ -20,7 +20,7 @@ Spreads we intend to Add:
 
 We also intend this to make this a full stack development project and although inexperienced , we plan to build a Flask Application and bridge it to a native app by using React Native. Anyone who thinks that they would enjoy developing this project with us, please open an issue or star the repo or submit a pull request, we would love to collaborate and increase the scope of the project. 
 
-As of now we have a very basic GUI setup that prints out our suggestion and shows tge payoff Matric Graph
+As of now we have a very basic GUI setup that prints out our suggestion and shows the payoff Matric Graph
 
 <img src="GUI.png"
      alt="Markdown Monster icon" />
