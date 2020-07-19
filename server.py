@@ -6,6 +6,7 @@ worker = ProjectRewarder(None, None, None, None)
 app = Flask(__name__)
 
 '''
+    ./ngrok http 7500
     curl -X POST -d "ticker=GOOG" localhost:7500/api/set_ticker
 '''
 
