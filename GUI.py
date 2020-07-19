@@ -14,6 +14,7 @@ canvas1.create_window(100,50,window=stock)
 def getStock():
 	st = stock.get()
 	PR.setstock(st)
+
 btn = Button(top, text = "Set stock", command = getStock)
 canvas1.create_window(100,90,window=btn)
 PR.setstock(stock.get())
