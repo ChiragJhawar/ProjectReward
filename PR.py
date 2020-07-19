@@ -6,10 +6,12 @@ import yfinance as yf
 import pytz
 import datetime
 from os import system, name
+date ='2020-08-21'
 stock =''
 def setstock(st):
     global stock
     stock = st
+setstock('UCO')
 def getDataPut():
     date = '2020-08-21'
     s = yf.Ticker(stock)
@@ -19,7 +21,18 @@ def getDataPut():
     opt = s.option_chain(date)
     puts =  opt.puts
     puts['Fair Price']  = [i if i >= 0.01 else 0.01 for i in (puts['ask'] + puts['bid'])/2]
-    return puts
+    p = puts[puts['volume']>=int(puts['volume'].mean())]
+    l = p[['strike', 'Fair Price']]
+    j = p[['strike', 'lastPrice']]
+    if p['ask'].mean() != 0:
+        m = l.set_index('strike').to_dict()
+        n = m['Fair Price'] 
+        print("Using Current Market Price")
+    else:
+        m = j.set_index('strike').to_dict()
+        n = m['lastPrice']
+        print("Using Last Price")
+    return n
 
 def getDataCall():
     date = '2020-08-21'
@@ -30,7 +43,20 @@ def getDataCall():
     opt = s.option_chain(date)
     calls, puts = opt.calls, opt.puts
     calls['Fair Price'] = [i if i >= 0.01 else 0.01 for i in (calls['ask']+calls['bid'])/2]
-    return calls
+    c = calls[calls['volume']>=int(calls['volume'].mean())]
+#     if t == 'Credit':
+#         c = calls[calls['inTheMoney'] == False]
+    l = c[['strike', 'Fair Price']]
+    j = c[['strike', 'lastPrice']]
+    if c['ask'].mean() != 0: #need to use time library for 
+        m = l.set_index('strike').to_dict()
+        n = m['Fair Price'] 
+        print("Using Current Market Price")
+    else:
+        m = j.set_index('strike').to_dict()
+        n = m['lastPrice']
+        print("Using Last Price")
+    return n
 
 def put_payoff(sT, k ,p):
     return np.where(sT<k, k-sT , 0)-p
@@ -79,34 +105,23 @@ def plotGraph(best_ratio, tittle, t):
     ax.set_title(tittle)
     plt.legend()
     plt.show() 
-def getCalls(calls):
-    c = calls[calls['volume']>=int(calls['volume'].mean())]
-#     if t == 'Credit':
-#         c = calls[calls['inTheMoney'] == False]
-    l = c[['strike', 'Fair Price']]
-    j = c[['strike', 'lastPrice']]
-    if c['ask'].mean() != 0: #need to use time library for 
-        m = l.set_index('strike').to_dict()
-        n = m['Fair Price'] 
-        print("Using Current Market Price")
-    else:
-        m = j.set_index('strike').to_dict()
-        n = m['lastPrice']
-        print("Using Last Price")
-    return n
-def getPuts(puts):
-    p = puts[puts['volume']>=int(puts['volume'].mean())]
-    l = p[['strike', 'Fair Price']]
-    j = p[['strike', 'lastPrice']]
-    if p['ask'].mean() != 0:
-        m = l.set_index('strike').to_dict()
-        n = m['Fair Price'] 
-        print("Using Current Market Price")
-    else:
-        m = j.set_index('strike').to_dict()
-        n = m['lastPrice']
-        print("Using Last Price")
-    return n
+# def getCalls(calls):
+#     c = calls[calls['volume']>=int(calls['volume'].mean())]
+# #     if t == 'Credit':
+# #         c = calls[calls['inTheMoney'] == False]
+#     l = c[['strike', 'Fair Price']]
+#     j = c[['strike', 'lastPrice']]
+#     if c['ask'].mean() != 0: #need to use time library for 
+#         m = l.set_index('strike').to_dict()
+#         n = m['Fair Price'] 
+#         print("Using Current Market Price")
+#     else:
+#         m = j.set_index('strike').to_dict()
+#         n = m['lastPrice']
+#         print("Using Last Price")
+#     return n
+# def getPuts(puts):
+    
 
 def appendBest(best_ratio, l, s, lp, sp, r, mrx, mrw):
     best_ratio['Long(Buy)']=l
@@ -135,8 +150,8 @@ def rnR(type, sL, sS, pL, pS):
 
 #Spread 1
 def Call_Credit_Spread():
-    calls = getDataCall()
-    n = getCalls(calls)
+    #calls = getDataCall()
+    n = getDataCall()
 #     We need to check the risk, reward, break even point
 #     Then we need to check the ratio of the risk/reward
 #     Then we need to store the 'Transaction' of the least ratio
@@ -169,12 +184,10 @@ def Call_Credit_Spread():
                         
     plotGraph(best_ratio, 'Call Credit Spread', 'callC')
     return print("Best Call Credit Spread: ", best_ratio)
-# setstock('UCO')
-# Call_Credit_Spread ()
+#Call_Credit_Spread ()
 #Spread 2
 def Put_Credit_Spread():
-    puts = getDataPut()
-    n = getPuts(puts)
+    n = getDataPut()
 #     We need to check the risk, reward, break even point
 #     Then we need to check the ratio of the risk/reward
 #     Then we need to store the 'Transaction' of the least ratio
@@ -211,8 +224,7 @@ def Put_Credit_Spread():
 
 #Spread 3
 def Call_Debit_Spread():
-    calls = getDataCall()
-    n = getCalls(calls)
+    n = getDataCall()
 #     We need to check the risk, reward, break even point
 #     Then we need to check the ratio of the risk/reward
 #     Then we need to store the 'Transaction' of the least ratio
@@ -228,7 +240,7 @@ def Call_Debit_Spread():
                 
                 #Declaring variables
                 strikeShort = short
-                strikeLong = longUCO
+                strikeLong = long
                 premiumShort = n[short]
                 premiumLong = n[long]
                 
@@ -249,8 +261,7 @@ def Call_Debit_Spread():
 
 #Spread 4
 def Put_Debit_Spread():
-    puts = getDataPut()
-    n = getPuts(puts)
+    n = getDataPut()
 #     We need to check the risk, reward, break even point
 #     Then we need to check the ratio of the risk/reward
 #     Then we need to store the 'Transaction' of the least ratio
@@ -287,7 +298,7 @@ def Put_Debit_Spread():
 
                         
     plotGraph(best_ratio, 'Put Debit Spread', 'putD')  
-    return ("Best Put Debit Spread: ", best_ratio)
+    return print(("Best Put Debit Spread: ", best_ratio))
 
 #Final Testing call for all spreads
 def finalSpreads():
@@ -300,7 +311,7 @@ def finalSpreads():
     Put_Debit_Spread()
     print("\n")
     Call_Credit_Spread()
-
+finalSpreads()
 
 
 

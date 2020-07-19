@@ -23,8 +23,6 @@ def get_pds():
 	text = PR.Put_Debit_Spread()
 	Label(win , text = text).pack()
 	
-
-
 btn1 = Button(top, text="Bearish Put Spread" , command = get_pds)
 btn2 = Button(top, text="Bearish Call Spread", command = PR.Call_Credit_Spread)
 btn3 = Button(top, text="Bullish Put Spread", command = PR.Put_Credit_Spread)
