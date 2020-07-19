@@ -51,7 +51,7 @@ def getData(prediction):
     #c = prediction[prediction['volume']>=int(prediction['volume'].mean())]
     c = prediction
     if c['ask'].mean() != 0: # need to use time library later on
-        l = c[['strike', 'Fair Price']]
+        l = c[['strike', 'Fair Price', 'impliedVolatility']]
         m = l.set_index('strike').to_dict()
         n = m['Fair Price'] 
         print("Using Current Market Price")
@@ -96,7 +96,9 @@ def plotStraddle(best_ratio):
 def longStraddle():
     best_ratio = { 'Strike Price' : 0, 'Call Premium':0, 'Put Premium':0, 'maxRisk':0}
     calls = getDatafirst()[0]
-    puts = getDatafirst()[1]  
+    puts = getDatafirst()[1] 
+    print(calls[['strike', 'impliedVolatility']])
+    print(puts[['strike', 'impliedVolatility']]) 
     nPut = n = getData(calls)
     nCall = n = getData(puts)
     for call in nCall:
@@ -109,7 +111,7 @@ def longStraddle():
                 best_ratio['maxRisk'] = maxRisk
                 break
 
-    plotStraddle(best_ratio)
+    #plotStraddle(best_ratio)
 
 longStraddle()
 
