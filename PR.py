@@ -111,23 +111,6 @@ def plotGraph(best_ratio, tittle, t):
     ax.set_title(tittle)
     plt.legend()
     plt.show() 
-# def getCalls(calls):
-#     c = calls[calls['volume']>=int(calls['volume'].mean())]
-# #     if t == 'Credit':
-# #         c = calls[calls['inTheMoney'] == False]
-#     l = c[['strike', 'Fair Price']]
-#     j = c[['strike', 'lastPrice']]
-#     if c['ask'].mean() != 0: #need to use time library for 
-#         m = l.set_index('strike').to_dict()
-#         n = m['Fair Price'] 
-#         print("Using Current Market Price")
-#     else:
-#         m = j.set_index('strike').to_dict()
-#         n = m['lastPrice']
-#         print("Using Last Price")
-#     return n
-# def getPuts(puts):
-    
 
 def appendBest(best_ratio, l, s, lp, sp, r, mrx, mrw):
     
@@ -230,7 +213,8 @@ def basicSpreads(t):
 #     plotGraph(best_ratio, 'Call Credit Spread', 'callC')
     plotGraph (best_ratio, 'Spread', t)
     return ("Best", t, "Spread: ", best_ratio)
-#setDate('2020-08-21')
+
+# setDate('2020-08-21')
 # setStock("UCO")
 # basicSpreads('callD')
 # print("\n")

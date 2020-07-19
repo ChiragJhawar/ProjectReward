@@ -1,8 +1,11 @@
 import PR
 from tkinter import*
 import tkinter as tk
+from sys import platform as sys_pf
+
 
 top = tk.Tk()
+top.title("ProjectReward")
 Label(top, text = "Welcome to Project Reward: \n Enter the stock of your choice and chose the spread type").pack()
 canvas1 = tk.Canvas(top, width = 200, height = 160)
 # greetings = Label(text = "Hello")
