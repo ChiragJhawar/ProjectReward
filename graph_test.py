@@ -8,28 +8,38 @@ import math
 
 def put_payoff(sT, k ,p):
 	return np.where(sT<k, k-sT , 0)-p
+
 def bear_put():
+    
 	#Random Stock Data
-	s0 = 160
+	currentPrice = 160
+    
 	 # Long Put
-	strike_price_long_put =165
-	premium_long_put = 9.7
+	strikeLongPut =165
+	premiumLongPut = 9.7
+    
 	 # Short Put
-	strike_price_short_put = 155
-	premium_short_put = 5.4
+	strikeShortPut = 155
+	premiumShortPut = 5.4
+    
 	sT = np.arange(100,220,1)
+    
 	#Bearish Put Payoff matrix graph
-	long_put_payoff = put_payoff(sT, strike_price_long_put,premium_long_put)
-	fig, ax = plt.subplots()
-	ax.plot(sT,long_put_payoff,'--', label = 'Long Put')
+	long_put_payoff = put_payoff(sT, strikeLongPut, premiumLongPut)
+	fig, ax = plt.subplots()   
+	ax.plot(sT,long_put_payoff,'--', label = 'Long Put')  
 	plt.axhline(color='black')
-	short_put_payoff = put_payoff(sT, strike_price_short_put,premium_short_put)*-1
+    
+	short_put_payoff = put_payoff(sT, strikeShortPut, premiumShortPut)*-1
 	ax.plot(sT,short_put_payoff, '--', label = 'Short Put')
+    
 	final_payoff = short_put_payoff+long_put_payoff
 	ax.plot(sT,final_payoff, label = 'Final Payoff')
+    
 	plt.xlabel('Stock Price (sT)')
 	plt.ylabel('Profit & Loss')
 	ax.set_title('Bear Put Payoff')
+    
 	plt.legend()
 	plt.show()
 
