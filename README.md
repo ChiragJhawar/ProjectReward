@@ -25,6 +25,6 @@ As of now we have a very basic GUI setup that prints out our suggestion and show
 <img src="GUI3.png" />
 <br />
 
-Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk. 
+Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk.<br /> 
  ![visitors](https://visitor-badge.laobi.icu/badge?page_id=ChiragJhawar.ProjectReward)
 
