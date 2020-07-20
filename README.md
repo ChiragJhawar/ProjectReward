@@ -10,8 +10,8 @@ Spreads we have:
 <br />
 
 Spreads we intend to Add:
-1. Straddle (Puts and Calls)
-2. Strangle (Puts and Calls)
+1. Straddle (Long and Short)
+2. Strangle (Long and Short)
 3. Box Spreads
 4. Butterfly Spreads
 5. Calendar Spreads
