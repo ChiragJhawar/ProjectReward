@@ -24,7 +24,7 @@ As of now we have a very basic GUI setup that prints out our suggestion and show
 
 <img src="GUI3.png" />
 <br />
-We have also set up the primitive stage 1 API and deployed it on a Flask app on a local host. We are in the process of linking it with a reactNative app to complete the bridge between backend and frontend. 
+We have also set up the primitive stage 1 API and deployed it on a Flask app on a local host. We are in the process of linking it with a reactNative app to complete the bridge between backend and frontend. <br /> 
 Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk.<br /> 
  ![visitors](https://visitor-badge.laobi.icu/badge?page_id=ChiragJhawar.ProjectReward)
 
