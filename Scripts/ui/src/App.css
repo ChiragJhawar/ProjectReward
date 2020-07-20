@@ -1,0 +1,43 @@
+html, body {
+  background: url('https://img.pngio.com/5-cool-backgrounds-free-jpeg-png-format-download-free-cool-png-and-backgrounds-600_340.jpg') center center no-repeat;
+  background-size: cover;
+  color: white;
+  height: 100%;
+  width: 100%;
+}
+
+.content {
+  margin: auto;
+  margin-top: 50px;
+  width: 90%;
+  height: auto;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.title {
+  padding-top: 140px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 3em;
+  letter-spacing: 0.15rem;
+  color: #fff;
+}
+
+label {
+  color: #333;
+}
+
+.result-container {
+  text-align: center;
+  font-weight: 600;
+  font-size: 4em;
+  letter-spacing: 0.15rem;
+  padding: 20px 0 0;
+}
+
+#result {
+  color: #000;
+}
