@@ -185,3 +185,4 @@ class ProjectRewarder:
                             if Ratio < self.best_ratio['Risk/Reward Ratio']:
                                 self.appendBest(long, short, premiumLong, premiumShort, Ratio, MaxRisk, MaxReward)
 
+worker = ProjectRewarder("UCO", "2020-08-20", "puts", "credit")
