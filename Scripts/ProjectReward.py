@@ -63,19 +63,26 @@ class ProjectRewarder:
         put['Fair Price']  = [i if i >= 0.01 else 0.01 for i in (put['ask'] + put['bid'])/2]
 
         currentPrice = s.history(period = "max")['Close'].iloc[-1]
-        oldPrice = s.history(period = "max")['Low'].iloc[-20]
+        oldPrice = s.history(period = "max")['Low'].iloc[-10]
         r = currentPrice - oldPrice
         priceRange = [int((currentPrice - r).round()), int((currentPrice + r).round())]
 
         # Assigning values to calls and puts
-        calls = call[call['strike'] <= priceRange[1]]
-        puts = put[put['strike'] >= priceRange[0]]
+        if self.spread_type == 'debit':
+        	calls = call[call['strike'] <= priceRange[1]]
+        	puts = put[put['strike'] >= priceRange[0]]
+
+        elif self.spread_type  == 'credit':   
+            calls = call[call['strike'] >= priceRange[1]]
+            puts = put[put['strike'] <= priceRange[0]]
 
         return calls, puts
 
     def getData(self, prediction):
 
         # Shortlisting calls/puts even more accoriding to good volume.
+        # prediction = calls if self.flag == 'calls' else puts
+        print(int(prediction['volume'].mean()), '\n\n')
         c = prediction[prediction['volume']>=int(prediction['volume'].mean())]
 
         if c['ask'].mean() != 0: # need to use time library later on
@@ -166,12 +173,10 @@ class ProjectRewarder:
         n = self.getData(calls if self.flag == "calls" else puts)
 
         self.best_ratio = {'Short(Sell)':0, 'Long(Buy)':0, 'Risk/Reward Ratio':((2**31)-1), 'Short Premium':0, 'Long Premium':0, 'maxRisk':0, 'maxReward':0}
-        # print(n)
         for toSell in n:
             for toBuy in n:
 
                 if (self.flag, self.spread_type) == ('puts', 'debit') or (self.flag, self.spread_type) == ('calls', 'credit'):
-
                     if toBuy > toSell:
                         strikeShort = toSell
                         strikeLong = toBuy
@@ -205,5 +210,8 @@ class ProjectRewarder:
                             Ratio =  round(MaxRisk/MaxReward, 4)
                             if Ratio < self.best_ratio['Risk/Reward Ratio']:
                                 self.appendBest(toBuy, toSell, premiumLong, premiumShort, Ratio, MaxRisk, MaxReward)
+        return self.best_ratio
 
-worker = ProjectRewarder("UCO", "2020-08-20", "puts", "credit")
+worker = ProjectRewarder("WKHS", "2020-07-23", "calls", "credit")
+
+print(worker.getBasicSpread())
