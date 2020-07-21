@@ -41,18 +41,20 @@ app = Flask(__name__)
 # def getSpread():
 # 	worker.getBasicSpread()
 # 	return jsonify(worker.best_ratio)
-@app.route('/api/spread/basic_spreads', methods=['POST'])
+
+worker.setTicker('GOOG')
+worker.setDate('2020-08-21')
+worker.setFlag('Calls')
+worker.setType('Credit')
+@app.route('/api/spread/basic_spreads', methods=['GET'])
 def getBasicSpread():
 	try:
-		data = request.form
-		print(data)
-		worker.setTicker(request.form['Stock'])
-		worker.setDate(request.form['selectDate'])
-		worker.setFlag(request.form['selectFlag'])
-		worker.setType(request.form['selectType'])
-		print(worker)
+		# worker.setTicker(request.form['Stock'])
+		# worker.setDate(request.form['selectDate'])
+		# worker.setFlag(request.form['selectFlag'])
+		# worker.setType(request.form['selectType'])
 		worker.getBasicSpread()
-		return jsonify(worker.best_ratio)
+		return jsonify('Hello World')
 	except:
 		return jsonify({'status': 501})
 	
