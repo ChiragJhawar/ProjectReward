@@ -37,15 +37,12 @@ class App extends Component {
   handlePredictClick = (event) => {
     const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch('http://127.0.0.1:7500/api/spread/basic_spreads', 
-      {
-        method: 'POST',
-        body: formData
-      })
-      .then(response => response.json())
-      .then(response => {
+    fetch(' http://127.0.0.1:7500//api/spread/basic_spreads',  {
+  credentials: 'same-origin'
+})
+.then(response => {
         this.setState({
-          result: response.result,
+          result: 'I hope this works',
           isLoading: false
         });
       });
@@ -125,7 +122,6 @@ class App extends Component {
                   disabled={isLoading}
                   onClick={!isLoading ? this.handlePredictClick : null}>
                   { isLoading ? 'Fetching Suggestions' : 'Suggest' }
-                  console.log(this.stat.formData)
                 </Button>
               </Col>
               <Col>
@@ -139,10 +135,10 @@ class App extends Component {
               </Col>
             </Row>
           </Form>
-          {result === "" ? null :
+          {isLoading === true? null :
             (<Row>
               <Col className="result-container">
-                <h5 id="result">{result}</h5>
+                <h5 id="result">Result :{formData.Stock} {formData.selectDate} {formData.selectFlag} {formData.selectType}</h5>
               </Col>
             </Row>)
           }
