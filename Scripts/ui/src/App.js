@@ -35,16 +35,12 @@ class App extends Component {
   }
 
   handlePredictClick = (event) => {
-    const formData = this.state.Stock.formData;
+    const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch('http://127.0.0.1:5000/prediction/', 
+    fetch('http://127.0.0.1:7500/api/spread/basic_spreads', 
       {
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        },
         method: 'POST',
-        body: JSON.stringify(formData)
+        body: formData
       })
       .then(response => response.json())
       .then(response => {
@@ -104,7 +100,7 @@ class App extends Component {
                   onChange={this.handleChange}>
                   <option>Please Select</option>
                   <option>Calls</option>
-                  <option>Pulls</option>
+                  <option>Puts</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
@@ -128,7 +124,8 @@ class App extends Component {
                   variant="success"
                   disabled={isLoading}
                   onClick={!isLoading ? this.handlePredictClick : null}>
-                  { isLoading ? 'Calculating' : 'Suggest' }
+                  { isLoading ? 'Fetching Suggestions' : 'Suggest' }
+                  console.log(this.stat.formData)
                 </Button>
               </Col>
               <Col>

@@ -42,4 +42,20 @@ def getSpread():
 	worker.getBasicSpread()
 	return jsonify(worker.best_ratio)
 
+#All 
+# @app.route('/api/spread/basic_spreads', methods=['POST'])
+# def getBasicSpread():
+# 	try:
+# 		data = request.form
+# 		print(data)
+# 		worker.setTicker(request.form['Stock'])
+# 		worker.setDate(request.form['selectDate'])
+# 		worker.setFlag(request.form['selectFlag'])
+# 		worker.setType(request.form['selectType'])
+# 		print(worker)
+# 		worker.getBasicSpread()
+# 		return jsonify(worker.best_ratio)
+# 	except:
+# 		return jsonify({'status': 501})
+
 app.run(debug=True, port=7500)
