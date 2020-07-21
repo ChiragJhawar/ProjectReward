@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
+import GraphElement from './GraphElement';
 
 class App extends Component {
 
@@ -20,7 +21,10 @@ class App extends Component {
         selectFlag: 1,
         selectType: 1
       },
-      result: ""
+      result: "",
+      xaxis: [],
+      yaxis: [],
+      graphIsVisible: false
     };
   }
 
@@ -33,18 +37,34 @@ class App extends Component {
       formData
     });
   }
-
+  triggerGraphRender = (data) => {
+    alert("Creating graph")
+    this.setState({
+      graphIsVisible: true,
+      result: JSON.stringify(data),
+      isLoading: false
+    })
+  }
   handlePredictClick = (event) => {
     const formData = this.state.formData;
     this.setState({ isLoading: true });
-    fetch(' http://127.0.0.1:7500//api/spread/basic_spreads',  {
-  credentials: 'same-origin'
-})
-.then(response => {
-        this.setState({
-          result: 'I hope this works',
-          isLoading: false
-        });
+    // debugger;
+    // debugger;
+    fetch('http://localhost:7500/api/spread/basic_spreads',
+      {
+        method: 'POST',
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(response => response.json()).then(data => {
+        this.triggerGraphRender(data);
+        // this.setState({
+        //   result: JSON.stringify(data),
+        //   isLoading: false
+        // });
       });
   }
 
@@ -67,16 +87,16 @@ class App extends Component {
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Label>Stock:</Form.Label>
-                <Form.Control 
-                  type="text" 
-                  placeholder="AAPL" 
+                <Form.Control
+                  type="text"
+                  placeholder="AAPL"
                   name="Stock"
                   value={formData.Stock}
                   onChange={this.handleChange} />
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label>Expiry Date</Form.Label>
-                <Form.Control 
+                <Form.Control
                   as="select"
                   value={formData.selectDate}
                   name="selectDate"
@@ -90,7 +110,7 @@ class App extends Component {
             <Form.Row>
               <Form.Group as={Col}>
                 <Form.Label>Option Type</Form.Label>
-                <Form.Control 
+                <Form.Control
                   as="select"
                   value={formData.selectFlag}
                   name="selectFlag"
@@ -102,7 +122,7 @@ class App extends Component {
               </Form.Group>
               <Form.Group as={Col}>
                 <Form.Label>Spread Type</Form.Label>
-                <Form.Control 
+                <Form.Control
                   as="select"
                   value={formData.selectType}
                   name="selectType"
@@ -130,18 +150,19 @@ class App extends Component {
                   variant="danger"
                   disabled={isLoading}
                   onClick={this.handleCancelClick}>
-                  Reset 
+                  Reset
                 </Button>
               </Col>
             </Row>
           </Form>
-          {isLoading === true? null :
+          {result === "" ? null :
             (<Row>
               <Col className="result-container">
-                <h5 id="result">Result :{formData.Stock} {formData.selectDate} {formData.selectFlag} {formData.selectType}</h5>
+                <h5 id="result">{result}</h5>
               </Col>
             </Row>)
           }
+          {this.state.graphIsVisible ? <GraphElement xaxis={this.state.xaxis} yaxis={this.state.yaxis}/> : ""}
         </div>
       </Container>
     );
