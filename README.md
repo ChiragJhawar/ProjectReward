@@ -28,6 +28,6 @@ We have also set up the primitive stage 1 API and deployed it on a Flask app on 
 
 We have also built a simple react application for the front end. We took inspiration from many available templates and made what fit our purpose best. We have linked the API to our Frontend it spits out the suggestions. Now we need to print the suggestions in a better way and integrate the payoff metric graph for better visualization. <br /> 
 
-<img src="react.png" />
+<img src="react_final_pic.png" />
 Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk.<br /> 
 
