@@ -126,6 +126,7 @@ class ProjectRewarder:
         premium_short= self.best_ratio['Short Premium']
 
         sT = np.arange(15,45,1)
+        
         if (self.flag, self.spread_type) == ('puts', 'debit') or (self.flag, self.spread_type) == ('calls', 'credit'):
             long_payoff = self.put_payoff(sT, strike_price_long,premium_long)
             short_payoff = self.put_payoff(sT, strike_price_short,premium_short)*-1
@@ -149,7 +150,6 @@ class ProjectRewarder:
         calls, puts = self.getInitialStockData()
         n = self.getData(calls if self.flag == "calls" else puts)
         self.best_ratio = {'Short(Sell)':0, 'Long(Buy)':0, 'Risk/Reward Ratio':((2**31)-1), 'Short Premium':0, 'Long Premium':0, 'maxRisk':0, 'maxReward':0}
-        # print(n)
         for short in n:
             for long in n:
                 if (self.flag, self.spread_type) == ('puts', 'debit') or (self.flag, self.spread_type) == ('calls', 'credit'):
@@ -179,6 +179,7 @@ class ProjectRewarder:
                         z = self.rnR(strikeLong, strikeShort, premiumLong, premiumShort)
                         MaxRisk = z[0]
                         MaxReward = z[1]
+
 
                         if MaxReward > 0:
                             Ratio =  MaxRisk/MaxReward
