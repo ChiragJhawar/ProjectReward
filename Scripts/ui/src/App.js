@@ -7,7 +7,9 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.css';
 import GraphElement from './GraphElement';
-
+import { AgGridReact } from 'ag-grid-react';
+import 'ag-grid-community/dist/styles/ag-grid.css';
+import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 class App extends Component {
 
   constructor(props) {
@@ -20,8 +22,16 @@ class App extends Component {
         selectDate: 1,
         selectFlag: 1,
         selectType: 1
+
       },
-      result: "",
+      Current_Price: 0 ,
+      Long_Premium : 0,
+      Long : 0,
+      Short_Premium :0,
+      Short : 0,
+      maxReward: 0,
+      maxRisk:0,
+      rR_Ratio :0,
       xaxis: [],
       yaxis: [],
       graphIsVisible: false
@@ -38,10 +48,18 @@ class App extends Component {
     });
   }
   triggerGraphRender = (data) => {
-    alert("Creating graph")
+    console.log(data)
     this.setState({
       graphIsVisible: true,
-      result: JSON.stringify(data),
+      Current_Price: data['Current Price'],
+      Long_Premium : data['Long Premium'],
+      Long : data['Long(Buy)'],
+      Short_Premium :data['Short Premium'],
+      Short :  data['Short(Sell)'],
+      maxReward: data['maxReward'],
+      maxRisk:data['maxRisk'],
+      rR_Ratio :data['Risk/Reward Ratio'],
+
       isLoading: false
     })
   }
@@ -155,11 +173,33 @@ class App extends Component {
               </Col>
             </Row>
           </Form>
-          {result === "" ? null :
-            (<Row>
-              <Col className="result-container">
-                <h5 id="result">{result}</h5>
-              </Col>
+          {this.state.Current_Price === 0 ? null :
+        (<Row>
+          <Col className="result-container">
+               <div
+        className="ag-theme-alpine"
+        style={{
+        height: '400px',
+        width: '390px' }}
+      > {"\n"}
+        <AgGridReact
+          columnDefs={[{
+        headerName: "Field", field: "field"
+      }, {
+        headerName: "Suggested Value", field: "sv"
+      }]}
+          rowData={[{
+        field: "Current Price", sv: this.state.Current_Price},
+        {field: "Long(Buy)", sv: this.state.Long},
+        {field: "Long Premium", sv: this.state.Long_Premium},
+        {field: "Short(Sell)", sv: this.state.Short},
+        {field: "Short Premium", sv: this.state.Short_Premium},
+        {field: "Maximum Risk", sv: this.state.maxRisk},
+        {field: "Maximum Reward", sv: this.state.maxReward},
+        {field: "Risk/Reward Ratio", sv: this.state.rR_Ratio}]}> 
+        </AgGridReact>
+      </div>
+        </Col>
             </Row>)
           }
           {this.state.graphIsVisible ? <GraphElement xaxis={this.state.xaxis} yaxis={this.state.yaxis}/> : ""}
