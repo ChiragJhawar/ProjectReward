@@ -10,6 +10,7 @@ import GraphElement from './GraphElement';
 import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
+
 class App extends Component {
 
   constructor(props) {
@@ -47,10 +48,9 @@ class App extends Component {
       formData
     });
   }
-  triggerGraphRender = (data) => {
+  triggerAPIResponse = (data) => {
     console.log(data)
     this.setState({
-      graphIsVisible: true,
       Current_Price: data['Current Price'],
       Long_Premium : data['Long Premium'],
       Long : data['Long(Buy)'],
@@ -59,7 +59,7 @@ class App extends Component {
       maxReward: data['maxReward'],
       maxRisk:data['maxRisk'],
       rR_Ratio :data['Risk/Reward Ratio'],
-
+      graphIsVisible: true,
       isLoading: false
     })
   }
@@ -78,7 +78,7 @@ class App extends Component {
         body: JSON.stringify(formData)
       })
       .then(response => response.json()).then(data => {
-        this.triggerGraphRender(data);
+        this.triggerAPIResponse(data);
         // this.setState({
         //   result: JSON.stringify(data),
         //   isLoading: false
@@ -87,13 +87,26 @@ class App extends Component {
   }
 
   handleCancelClick = (event) => {
-    this.setState({ result: "" });
+    this.setState({ 
+      Current_Price: 0 ,
+      Long_Premium : 0,
+      Long : 0,
+      Short_Premium :0,
+      Short : 0,
+      maxReward: 0,
+      maxRisk:0,
+      rR_Ratio :0,
+      xaxis: [],
+      yaxis: [],
+      graphIsVisible: false
+    });
   }
 
   render() {
     const isLoading = this.state.isLoading;
     const formData = this.state.formData;
     const result = this.state.result;
+
 
     return (
       <Container>
@@ -162,18 +175,7 @@ class App extends Component {
                   { isLoading ? 'Fetching Suggestions' : 'Suggest' }
                 </Button>
               </Col>
-              <Col>
-                <Button
-                  block
-                  variant="danger"
-                  disabled={isLoading}
-                  onClick={this.handleCancelClick}>
-                  Reset
-                </Button>
-              </Col>
-            </Row>
-          </Form>
-          {this.state.Current_Price === 0 ? null :
+              {this.state.Current_Price === 0 ? null :
         (<Row>
           <Col className="result-container">
                <div
@@ -202,6 +204,17 @@ class App extends Component {
         </Col>
             </Row>)
           }
+              <Col>
+                <Button
+                  block
+                  variant="danger"
+                  disabled={isLoading}
+                  onClick={this.handleCancelClick}>
+                  Reset
+                </Button>
+              </Col>
+            </Row>
+          </Form>
           {this.state.graphIsVisible ? <GraphElement xaxis={this.state.xaxis} yaxis={this.state.yaxis}/> : ""}
         </div>
       </Container>
