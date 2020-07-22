@@ -16,21 +16,17 @@ print("CORRECT")
     curl -X POST -d "flag=calls" localhost:7500/api/set_flag
     curl -X POST -d "spread_type=credit" localhost:7500/api/set_type
     curl -X POST -d "Stock=GOOG" localhost:7500/api/spread/basic_spreads
-
 '''
 
 @app.route('/api/spread/basic_spreads', methods=['POST'])
 def getBasicSpread():
     try:
         data = request.json
-        print(data)
         worker.setTicker(data['Stock'])
         worker.setDate(data['selectDate'])
         worker.setFlag(data['selectFlag'])
         worker.setType(data['selectType'])
-        print(worker)
         worker.getBasicSpread()
-        print(worker.best_ratio)
         return jsonify(worker.best_ratio)
     except Exception as e:
         return jsonify({'status': 501, 'exception': e})
