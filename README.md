@@ -24,9 +24,9 @@ As of now we have a very basic GUI setup that prints out our suggestion and show
 
 <img src="GUI3.png" />
 <br />
-We have also set up the primitive stage 1 API and deployed it on a Flask app on a local host. We are in the process of linking it with a reactNative app to complete the bridge between backend and frontend. <br /> <br /> 
+We have also set up the primitive stage 1 API and deployed it on a Flask app on a local host.   <br /> <br /> 
 
-We have also built a simple react application for the front end. We took insopiration from many available templates and made what fit our purpose best. We are yet to establish the link between the react app and the flask API.<br /> 
+We have also built a simple react application for the front end. We took inspiration from many available templates and made what fit our purpose best. We have linked the API to our Frontend it spits out the suggestions. Now we need to print the suggestions in a better way and integrate the payoff metric graph for better visualization. <br /> 
 
 <img src="react.png" />
 Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk.<br /> 
