@@ -19,32 +19,6 @@ print("CORRECT")
 
 '''
 
-# @app.route('/api/set_ticker', methods=['POST'])
-# def setTicker():
-#     #when passing in variables to a flask method, check request.args, request.form, and request.json
-#     response = worker.setTicker(request.form['ticker'])
-#     print(worker)
-#     return jsonify(response)
-
-# @app.route('/api/set_date', methods=['POST'])
-# def setDate():
-# 	response = worker.setDate(request.form['date'])
-# 	print(worker)
-# 	return jsonify(response)
-# @app.route('/api/set_flag', methods=['POST'])
-# def setFlag():
-# 	response = worker.setFlag(request.form['flag'])
-# 	print(worker)
-# 	return jsonify(response)
-# @app.route('/api/set_type', methods=['POST'])
-# def setType():
-# 	response = worker.setType(request.form['spread_type'])
-# 	print(worker)
-# 	return jsonify(response)
-# @app.route('/api/spread/basic_spreads', methods=['GET'])
-# def getSpread():
-# 	worker.getBasicSpread()
-# 	return jsonify(worker.best_ratio)
 @app.route('/api/spread/basic_spreads', methods=['POST'])
 def getBasicSpread():
     try:
@@ -56,6 +30,7 @@ def getBasicSpread():
         worker.setType(data['selectType'])
         print(worker)
         worker.getBasicSpread()
+        print(worker.best_ratio)
         return jsonify(worker.best_ratio)
     except Exception as e:
         return jsonify({'status': 501, 'exception': e})

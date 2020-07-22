@@ -102,7 +102,7 @@ class App extends Component {
                   name="selectDate"
                   onChange={this.handleChange}>
                   <option>Please Select</option>
-                  <option>2020-08-20</option>
+                  <option>2020-08-21</option>
                 </Form.Control>
               </Form.Group>
             </Form.Row>
@@ -116,8 +116,8 @@ class App extends Component {
                   name="selectFlag"
                   onChange={this.handleChange}>
                   <option>Please Select</option>
-                  <option>Calls</option>
-                  <option>Puts</option>
+                  <option>calls</option>
+                  <option>puts</option>
                 </Form.Control>
               </Form.Group>
               <Form.Group as={Col}>
@@ -128,8 +128,8 @@ class App extends Component {
                   name="selectType"
                   onChange={this.handleChange}>
                   <option>Please Select</option>
-                  <option>Credit</option>
-                  <option>Debit</option>
+                  <option>credit</option>
+                  <option>debit</option>
                 </Form.Control>
               </Form.Group>
 
