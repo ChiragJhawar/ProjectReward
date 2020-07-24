@@ -188,7 +188,7 @@ class App extends Component {
           columnDefs={[{
         headerName: "Field", field: "field"
       }, {
-        headerName: "Suggested Value", field: "sv"
+        headerName: "Value", field: "sv"
       }]}
           rowData={[{
         field: "Current Price", sv: this.state.Current_Price},
