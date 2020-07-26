@@ -28,7 +28,7 @@ Spreads we intend to Add:
 6. Strips and Straps
 <br />
 
-To keep the siggestions valid, we have implemented the the Black Scholes and the Monte Carlo pricing models to determine the risk neutral price valution (Fair Price) for the option. <br /> <br />
+To keep the suggestions valid, we have implemented the the Black Scholes and the Monte Carlo pricing models to determine the risk neutral price valution (Fair Price) for the option. <br /> <br />
 We also intend this to make this a full stack development project, we plan to build a Flask Application and bridge it to a native app by using React Native. Anyone who thinks that they would enjoy developing this project with us, please open an issue or star the repo or submit a pull request, we would love to collaborate and expand the scope of the project. 
 
 We have a very basic GUI setup that prints out our suggestion and shows the payoff Matric Graph
