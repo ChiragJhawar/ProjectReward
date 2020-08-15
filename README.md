@@ -1,5 +1,15 @@
-# ProjectReward
+<p align="center">
+ <img width="100px" src="https://res.cloudinary.com/anuraghazra/image/upload/v1594908242/logo_ccswme.svg" align="center" alt="Github Readme Stats" />
+ <h2 align="center">Project Reward</h2>
+</p>
 
+![Author](https://img.shields.io/badge/author-ApurvShah007-green)
+![Author](https://img.shields.io/badge/author-ChiragJhawar-green)
+![Last Commit](https://img.shields.io/github/last-commit/ChiragJhawar/ProjectReward)
+![Maintained](https://img.shields.io/maintenance/yes/2020)
+![Issues](https://img.shields.io/github/issues/ChiragJhawar/ProjectReward)
+<br />
+<br />
 A software to shortlist and find the best options spread available for a given stock and help visualise it using payoff metric graphs. We have considered a lot of factors to make the suggestinos as sensible as possible and also tried to quantify the fair price using Black-Scholes. All data used is from Yahoo Finance.
 
 As of now this project consists of the basic Bear and Bull spreads with calls and puts but we intend to add more complex graphs corssing between calls and puts and also options with different expiry dates.
@@ -18,7 +28,7 @@ Spreads we intend to Add:
 6. Strips and Straps
 <br />
 
-To keep the siggestions valid, we have implemented the the Black Scholes and the Monte Carlo pricing models to determine the risk neutral price valution (Fair Price) for the option. <br /> <br />
+To keep the suggestions valid, we have implemented the the Black Scholes and the Monte Carlo pricing models to determine the risk neutral price valution (Fair Price) for the option. <br /> <br />
 We also intend this to make this a full stack development project, we plan to build a Flask Application and bridge it to a native app by using React Native. Anyone who thinks that they would enjoy developing this project with us, please open an issue or star the repo or submit a pull request, we would love to collaborate and expand the scope of the project. 
 
 We have a very basic GUI setup that prints out our suggestion and shows the payoff Matric Graph
