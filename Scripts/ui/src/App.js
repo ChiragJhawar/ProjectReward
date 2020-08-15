@@ -15,7 +15,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-
     this.state = {
       isLoading: false,
       formData: {
@@ -23,7 +22,6 @@ class App extends Component {
         selectDate: 1,
         selectFlag: 1,
         selectType: 1
-
       },
       Current_Price: 0 ,
       Long_Premium : 0,
@@ -68,7 +66,7 @@ class App extends Component {
     this.setState({ isLoading: true });
     // debugger;
     // debugger;
-    fetch('http://localhost:7500/api/spread/basic_spreads',
+    fetch('https://projectreward.herokuapp.com/api/spread/basic_spreads',
       {
         method: 'POST',
         headers: {
@@ -88,6 +86,13 @@ class App extends Component {
 
   handleCancelClick = (event) => {
     this.setState({ 
+       formData: {
+        Stock: '',
+        selectDate: 1,
+        selectFlag: 1,
+        selectType: 1
+
+      },
       Current_Price: 0 ,
       Long_Premium : 0,
       Long : 0,
