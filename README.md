@@ -10,6 +10,12 @@
 ![Issues](https://img.shields.io/github/issues/ChiragJhawar/ProjectReward)
 <br />
 <br />
+![Heroku](https://heroku-badge.herokuapp.com/?app=heroku-badge)
+<br />
+<br />
+The app is hosted on Firebase and the API server is hosted on Heroku. Please check out the running model [here](https://test-77ff3.web.app/)
+<br />
+<br />
 A software to shortlist and find the best options spread available for a given stock and help visualise it using payoff metric graphs. We have considered a lot of factors to make the suggestinos as sensible as possible and also tried to quantify the fair price using Black-Scholes. All data used is from Yahoo Finance.
 
 As of now this project consists of the basic Bear and Bull spreads with calls and puts but we intend to add more complex graphs corssing between calls and puts and also options with different expiry dates.
