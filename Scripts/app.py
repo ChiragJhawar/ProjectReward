@@ -1,9 +1,10 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 import yfinance as yf
+import os
 
 pd.options.display.float_format = '{:.3f}'.format
 
@@ -192,7 +193,7 @@ class ProjectRewarder:
 
 worker = ProjectRewarder(None, None, None, None)
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='build')
 cors = CORS(app)
 
 print("CORRECT")
@@ -204,7 +205,15 @@ print("CORRECT")
     curl -X POST -d "flag=calls" localhost:7500/api/set_flag
     curl -X POST -d "spread_type=credit" localhost:7500/api/set_type
     curl -X POST -d "Stock=GOOG" localhost:7500/api/spread/basic_spreads
+
 '''
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve(path):
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder, 'index.html')
 
 @app.route('/api/spread/basic_spreads', methods=['POST'])
 def getBasicSpread():

@@ -66,7 +66,7 @@ class App extends Component {
     this.setState({ isLoading: true });
     // debugger;
     // debugger;
-    fetch('https://projectreward.herokuapp.com/api/spread/basic_spreads',
+    fetch('/api/spread/basic_spreads',
       {
         method: 'POST',
         headers: {
@@ -138,7 +138,7 @@ class App extends Component {
                   name="selectDate"
                   onChange={this.handleChange}>
                   <option>Please Select</option>
-                  <option>2020-08-21</option>
+                  <option>2020-12-18</option>
                 </Form.Control>
               </Form.Group>
             </Form.Row>
