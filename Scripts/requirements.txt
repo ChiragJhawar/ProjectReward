@@ -5,4 +5,4 @@ Flask
 flask_cors
 gunicorn
 matplotlib
-Jinja2==2.10.1
+Jinja2==2.11.3
