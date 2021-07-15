@@ -48,3 +48,4 @@ We have also built a simple react application for the front end. We took inspira
 <img src="react_final_pic.png" />
 Disclaimer - We are not financial experts and we are too learning as we go along. Please use the suggestions from this repo at your own risk.<br /> 
 
+Made by - Apurv Shah and Chirag Jhawar.
